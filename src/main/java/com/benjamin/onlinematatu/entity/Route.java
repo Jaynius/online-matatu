@@ -1,15 +1,15 @@
 package com.benjamin.onlinematatu.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Route {
 
     @Id
@@ -19,6 +19,9 @@ public class Route {
     private String origin;
     private String destination;
     private double fare;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "matatu_list")
     private List<Matatu> matatuList;
 
 }
