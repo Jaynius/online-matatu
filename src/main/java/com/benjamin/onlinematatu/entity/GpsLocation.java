@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class GpsLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int gpsId;
+    private Integer gpsId;
     private String latitude;
     private String longitude;
     private LocalDateTime timestamp;
