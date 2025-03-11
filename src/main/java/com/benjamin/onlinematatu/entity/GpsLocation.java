@@ -17,7 +17,7 @@ public class GpsLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer gpsId;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double  longitude;
     private LocalDateTime timestamp;
 }
