@@ -26,4 +26,7 @@ public class Matatu {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="route")
     private Route route;
+
+    @ManyToMany(mappedBy = "matatus")
+    private List<Passenger> passenger;
 }

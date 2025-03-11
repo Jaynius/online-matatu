@@ -17,6 +17,7 @@ public class Payment {
     private int paymentId;
     private float amount;
     private LocalDate timestamp;
+    private String confirmationCode;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Passenger passenger;
