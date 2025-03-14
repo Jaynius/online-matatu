@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -50,21 +51,66 @@ public class MatatuServiceImpl implements MatatuService {
 
     @Override
     public MatatuDTO getMatatuByLicenceNumber(String licenceNumber,MatatuDTO matatuDTO) {
-        return null;
+        List<Matatu> matatuList=matatuRepo.findAll();
+
+        if(matatuList.isEmpty()){
+            throw new RuntimeException("Matatu list not found");
+        }
+            for(Matatu matatu:matatuList) {
+                if (matatu.getLicenceNumber().equals(licenceNumber)) {
+                    return convertToDTO(matatu);
+                } else throw new RuntimeException("Licence number not found");
+            }
+
+        throw new RuntimeException("Licence number not found");
+
+
     }
 
     @Override
     public MatatuDTO addMatatu(MatatuDTO matatuDTO) {
-        return null;
+        Matatu newMatatu = convertToEntity(matatuDTO);
+        matatuRepo.save(newMatatu);
+        return convertToDTO(newMatatu);
     }
 
     @Override
     public void deleteMatatuByLicenceNumber(String licenceNumber) {
+        List<Matatu> matatuList=matatuRepo.findAll();
+        if(matatuList.isEmpty()){
+            throw new RuntimeException("Matatu list not found");
+
+        }
+            for (Matatu matatu:matatuList) {
+                if (matatu.getLicenceNumber().equals(licenceNumber)) {
+                    matatuRepo.delete(matatu);
+
+                }
+            }
+
+        throw new RuntimeException("Licence number not found");
+
+
 
     }
 
     @Override
     public MatatuDTO updateMatatuByLicenseNumber(String licenceNumber, MatatuDTO matatuDTO) {
-        return null;
+        List<Matatu> matatulist=matatuRepo.findAll();
+        if(matatulist.isEmpty()){
+            throw new RuntimeException("Matatu list not found");
+        }
+           for(Matatu matatu:matatulist) {
+               if (matatu.getLicenceNumber().equals(licenceNumber)) {
+                   matatu.setLicenceNumber(matatuDTO.getLicenceNumber());
+                   matatu.setRoute(matatuDTO.getRoute());
+                   matatu.setDriverName(matatuDTO.getDriverName());
+                   matatu.setCapacity(matatuDTO.getCapacity());
+                   matatu.setCurrentGpsLocation(matatuDTO.getCurrentGpsLocation());
+                   matatuRepo.save(matatu);
+               }
+           }
+        throw new RuntimeException("Licence number not found");
+
     }
 }
