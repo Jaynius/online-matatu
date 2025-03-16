@@ -22,14 +22,15 @@ public class PassengerController {
         return new ResponseEntity<>(passenger, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<PassengerDTO> getPassenger(@RequestParam Integer id){
+    @GetMapping("/all")
+    public ResponseEntity<PassengerDTO> getPassenger(@PathVariable Integer id){
         PassengerDTO passenger=passengerService.getPassenger(id);
         return new ResponseEntity<>(passenger, HttpStatus.OK);
     }
 
     @GetMapping
     public  ResponseEntity<List<PassengerDTO>> getAllPassenger(){
-        return new ResponseEntity<>(passengerService.getAllPassenger(), HttpStatus.OK);
+        List<PassengerDTO> passengerList=passengerService.getAllPassenger();
+        return new ResponseEntity<>(passengerList, HttpStatus.OK);
     }
 }

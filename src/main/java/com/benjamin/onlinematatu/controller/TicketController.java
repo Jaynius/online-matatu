@@ -34,11 +34,7 @@ public class TicketController {
         return new ResponseEntity<>(ticket, HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<TicketDTO>> getAllTickets(){
-        List<TicketDTO> ticketList=ticketService.getTickets();
-        return new ResponseEntity<>(ticketList, HttpStatus.OK);
-    }
+
 
     @DeleteMapping("/{ticketId}")
     public ResponseEntity<Void> deleteTicket(@PathVariable Integer ticketId){
@@ -50,5 +46,11 @@ public class TicketController {
     public ResponseEntity<TicketDTO> updateTicket(@PathVariable Integer ticketId, @RequestBody TicketDTO ticketDTO){
         TicketDTO ticket=ticketService.updateTicketById(ticketId, ticketDTO);
         return new ResponseEntity<>(ticket, HttpStatus.OK);
+    }
+
+    @GetMapping("/{passengerId}")
+    public ResponseEntity<List<TicketDTO>> getTicketByPassengerID(@PathVariable Integer passengerId){
+        List<TicketDTO> ticketList=ticketService.getTicketByPassengerID(passengerId);
+        return new ResponseEntity<>(ticketList, HttpStatus.OK);
     }
 }
