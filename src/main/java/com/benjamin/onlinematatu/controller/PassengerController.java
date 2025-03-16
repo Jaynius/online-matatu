@@ -30,6 +30,7 @@ public class PassengerController {
 
     @GetMapping
     public  ResponseEntity<List<PassengerDTO>> getAllPassenger(){
+
         return new ResponseEntity<>(passengerService.getAllPassenger(), HttpStatus.OK);
     }
 
