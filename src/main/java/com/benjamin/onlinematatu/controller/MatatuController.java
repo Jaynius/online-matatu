@@ -33,6 +33,21 @@ public class MatatuController {
         return new ResponseEntity<>(matatuList, HttpStatus.OK);
     }
 
+    @GetMapping("/{licenceNumber}")
+    public ResponseEntity<MatatuDTO> getMatatuByLicenceNumber(@PathVariable String licenceNumber) {
+        MatatuDTO matatu=matatuService.getMatatuByLicenceNumber(licenceNumber);
+        return new ResponseEntity<>(matatu, HttpStatus.OK);
+    }
 
+    @DeleteMapping("/{licenceNumber}")
+    public ResponseEntity<Void> deleteMatatu(@PathVariable String licenceNumber) {
+        matatuService.deleteMatatuByLicenceNumber(licenceNumber);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
+    @PatchMapping("/{licenceNumber}")
+    public ResponseEntity<MatatuDTO> updateMatatu(@PathVariable String licenceNumber, @RequestBody MatatuDTO matatuDTO) {
+        MatatuDTO matatu=matatuService.updateMatatuByLicenseNumber(licenceNumber, matatuDTO);
+        return new ResponseEntity<>(matatu, HttpStatus.OK);
+    }
 }

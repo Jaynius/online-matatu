@@ -29,4 +29,7 @@ public class Matatu {
 
     @ManyToMany(mappedBy = "matatus")
     private List<Passenger> passenger;
+
+    @OneToMany(mappedBy = "matatu", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> ticketList;
 }

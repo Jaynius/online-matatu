@@ -11,7 +11,7 @@ public interface MatatuService {
     public MatatuDTO convertToDTO(Matatu matatu);
     public Matatu convertToEntity(MatatuDTO matatuDTO);
     public List<MatatuDTO> getAllMatatus();
-    public MatatuDTO getMatatuByLicenceNumber(String licenceNumber, MatatuDTO matatuDTO);
+    public MatatuDTO getMatatuByLicenceNumber(String licenceNumber);
     public MatatuDTO addMatatu(MatatuDTO matatuDTO);
     public void deleteMatatuByLicenceNumber(String licenceNumber);
     public MatatuDTO updateMatatuByLicenseNumber(String licenceNumber, MatatuDTO matatuDTO);

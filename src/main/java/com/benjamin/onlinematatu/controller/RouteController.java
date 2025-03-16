@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RouteController {
 
-    @Autowired
+
     private final RouteService routeService;
 
     @PostMapping

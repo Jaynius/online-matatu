@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RouteServiceImpl implements RouteService {
 
-    @Autowired
     private final RouteRepo routeRepo;
 
     @Override

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Data
 public class TicketDTO {
     private int seatNumber;
-    private boolean paid;
     private LocalDate date;
 
     private Passenger passenger;

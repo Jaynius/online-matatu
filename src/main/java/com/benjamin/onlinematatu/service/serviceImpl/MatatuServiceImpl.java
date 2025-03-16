@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class MatatuServiceImpl implements MatatuService {
 
-    @Autowired
     private final MatatuRepo matatuRepo;
 
     @Override
@@ -50,7 +48,7 @@ public class MatatuServiceImpl implements MatatuService {
     }
 
     @Override
-    public MatatuDTO getMatatuByLicenceNumber(String licenceNumber,MatatuDTO matatuDTO) {
+    public MatatuDTO getMatatuByLicenceNumber(String licenceNumber) {
         List<Matatu> matatuList=matatuRepo.findAll();
 
         if(matatuList.isEmpty()){

@@ -15,7 +15,6 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
     private int seatNumber;
-    private boolean paid;
     private LocalDate date;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -24,7 +23,8 @@ public class Ticket {
     @OneToOne(cascade = CascadeType.ALL)
     private Route route;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "matatu_id", nullable = false)
     private Matatu matatu;
 
 }
