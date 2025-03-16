@@ -79,12 +79,17 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDTO getTicketByPassengerID(Integer passengerId) {
-        Ticket ticket = ticketRepo.findByPassengerId(passengerId);
-        if (ticket == null) {
-            throw new RuntimeException("Ticket not found");
+    public TicketDTO getTicketByPassengerID(Integer passengerIdd) {
+        List<Ticket> ticketList = ticketRepo.findAll();
+        if(ticketList.isEmpty()){
+            throw new RuntimeException("Ticket list not found");
         }
-        return convertToDTO(ticket);
+        for(Ticket ticket:ticketList){
+            if(ticket.getPassenger().getPassengerId()==passengerIdd){
+                return convertToDTO(ticket);
+            }
+        }
+        throw new RuntimeException("Ticket not found");
     }
 
 

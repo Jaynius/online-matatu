@@ -34,11 +34,11 @@ public class TicketController {
         return new ResponseEntity<>(ticket, HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<TicketDTO>> getAllTickets(){
-        List<TicketDTO> ticketList=ticketService.getTickets();
-        return new ResponseEntity<>(ticketList, HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<TicketDTO>> getAllTickets(){
+//        List<TicketDTO> ticketList=ticketService.getTickets();
+//        return new ResponseEntity<>(ticketList, HttpStatus.OK);
+//    }
 
     @DeleteMapping("/{ticketId}")
     public ResponseEntity<Void> deleteTicket(@PathVariable Integer ticketId){
