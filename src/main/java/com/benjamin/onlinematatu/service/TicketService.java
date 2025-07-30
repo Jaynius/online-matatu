@@ -16,5 +16,6 @@ public interface TicketService {
     public TicketDTO updateTicketById(Integer id, TicketDTO ticketDTO);
 
    public TicketDTO getTicketById(Integer ticketId);
-   public  TicketDTO getTicketByPassengerID(Integer passengerIdd);
+   public TicketDTO getTicketByPassengerID(Integer passengerIdd);
+   public List<TicketDTO> getTicketsByPassenger(Integer passengerId);
 }

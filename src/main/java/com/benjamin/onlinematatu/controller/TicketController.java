@@ -1,10 +1,14 @@
 package com.benjamin.onlinematatu.controller;
 
 import com.benjamin.onlinematatu.DTO.TicketDTO;
+import com.benjamin.onlinematatu.entity.User;
 import com.benjamin.onlinematatu.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +28,17 @@ public class TicketController {
 
     @GetMapping
     public ResponseEntity<List<TicketDTO>> getAllTicket(){
-        List<TicketDTO> ticketList=ticketService.getTickets();
-        return new ResponseEntity<>(ticketList, HttpStatus.OK);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        
+        if (currentUser.getRole() == User.Role.ADMIN) {
+            List<TicketDTO> ticketList = ticketService.getTickets();
+            return new ResponseEntity<>(ticketList, HttpStatus.OK);
+        } else {
+            // For passengers, return only their tickets
+            List<TicketDTO> ticketList = ticketService.getTicketsByPassenger(currentUser.getPassenger().getPassengerId());
+            return new ResponseEntity<>(ticketList, HttpStatus.OK);
+        }
     }
 
     @GetMapping("/{ticketId}")

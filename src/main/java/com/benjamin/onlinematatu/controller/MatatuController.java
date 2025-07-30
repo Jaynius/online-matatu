@@ -3,7 +3,6 @@ package com.benjamin.onlinematatu.controller;
 
 import com.benjamin.onlinematatu.DTO.MatatuDTO;
 import com.benjamin.onlinematatu.entity.Matatu;
-import com.benjamin.onlinematatu.repository.MatatuRepo;
 import com.benjamin.onlinematatu.service.MatatuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

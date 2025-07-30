@@ -15,4 +15,5 @@ public interface PaymentService {
     public void deletePayment(Integer id);
     public PaymentDTO updatePaymentById(Integer id, PaymentDTO paymentDTO);
     public PaymentDTO getPaymentById(Integer paymentId);
+    public List<PaymentDTO> getPaymentsByPassenger(Integer passengerId);
 }

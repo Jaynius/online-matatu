@@ -75,5 +75,13 @@ public class PaymentServiceImpl implements PaymentService {
         return convertToDTO(payment);
     }
 
+    @Override
+    public List<PaymentDTO> getPaymentsByPassenger(Integer passengerId) {
+        return paymentRepo.findAll()
+                .stream()
+                .filter(payment -> payment.getPassenger().getPassengerId() == passengerId)
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
 
 }

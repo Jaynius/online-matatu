@@ -92,5 +92,13 @@ public class TicketServiceImpl implements TicketService {
         throw new RuntimeException("Ticket not found");
     }
 
+    @Override
+    public List<TicketDTO> getTicketsByPassenger(Integer passengerId) {
+        return ticketRepo.findAll()
+                .stream()
+                .filter(ticket -> ticket.getPassenger().getPassengerId() == passengerId)
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
 
 }

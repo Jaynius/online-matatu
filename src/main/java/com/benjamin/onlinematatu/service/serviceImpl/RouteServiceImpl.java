@@ -1,12 +1,10 @@
 package com.benjamin.onlinematatu.service.serviceImpl;
 
-import com.benjamin.onlinematatu.DTO.MatatuDTO;
 import com.benjamin.onlinematatu.DTO.RouteDTO;
 import com.benjamin.onlinematatu.entity.Route;
 import com.benjamin.onlinematatu.repository.RouteRepo;
 import com.benjamin.onlinematatu.service.RouteService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

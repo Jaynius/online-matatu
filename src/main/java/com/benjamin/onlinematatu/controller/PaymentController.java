@@ -2,9 +2,12 @@ package com.benjamin.onlinematatu.controller;
 
 
 import com.benjamin.onlinematatu.DTO.PaymentDTO;
+import com.benjamin.onlinematatu.entity.User;
 import com.benjamin.onlinematatu.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentController {
 
+    
     private final PaymentService paymentService;
 
     @PostMapping
@@ -30,8 +34,17 @@ public class PaymentController {
 
     @GetMapping
     public ResponseEntity<List<PaymentDTO>> getAllPayments(){
-        List<PaymentDTO> paymentList=paymentService.getPayments();
-        return ResponseEntity.ok(paymentList);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        
+        if (currentUser.getRole() == User.Role.ADMIN) {
+            List<PaymentDTO> paymentList = paymentService.getPayments();
+            return ResponseEntity.ok(paymentList);
+        } else {
+            // For passengers, return only their payments
+            List<PaymentDTO> paymentList = paymentService.getPaymentsByPassenger(currentUser.getPassenger().getPassengerId());
+            return ResponseEntity.ok(paymentList);
+        }
     }
 
     @PatchMapping("/{ticketId}")

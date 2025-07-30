@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Matatu Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-bus"></i> Online Matatu</h1>
+                <p>Public Transport Management System</p>
+            </div>
+            <div class="auth-section" id="auth-section">
+                <button class="btn btn-primary" onclick="showLoginForm()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-secondary" onclick="showRegisterForm()">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+            <div class="user-section hidden" id="user-section">
+                <span class="user-info" id="user-info">Welcome, <span id="username"></span></span>
+                <button class="btn btn-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </button>
+            <button class="nav-btn admin-only" data-section="matatus">
+                <i class="fas fa-bus"></i> Matatus
+            </button>
+            <button class="nav-btn admin-only" data-section="passengers">
+                <i class="fas fa-users"></i> Passengers
+            </button>
+            <button class="nav-btn admin-only" data-section="routes">
+                <i class="fas fa-route"></i> Routes
+            </button>
+            <button class="nav-btn" data-section="tickets">
+                <i class="fas fa-ticket-alt"></i> My Tickets
+            </button>
+            <button class="nav-btn" data-section="payments">
+                <i class="fas fa-credit-card"></i> My Payments
+            </button>
+            <button class="nav-btn admin-only" data-section="gps">
+                <i class="fas fa-map-marker-alt"></i> GPS Tracking
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bus"></i> Total Matatus</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stat-number" id="matatu-count">-</div>
+                            <div class="stat-label">Registered Vehicles</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-users"></i> Total Passengers</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stat-number" id="passenger-count">-</div>
+                            <div class="stat-label">Registered Users</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-route"></i> Active Routes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stat-number" id="route-count">-</div>
+                            <div class="stat-label">Available Routes</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-ticket-alt"></i> Today's Tickets</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stat-number" id="ticket-count">-</div>
+                            <div class="stat-label">Booked Today</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div id="activity-feed" class="activity-list">
+                        <!-- Activity items will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Matatus Section -->
+            <section id="matatus" class="section">
+                <div class="section-header">
+                    <h2>Matatu Management</h2>
+                    <button class="btn btn-primary admin-only" onclick="showMatatuForm()">
+                        <i class="fas fa-plus"></i> Add Matatu
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>License Number</th>
+                                <th>Capacity</th>
+                                <th>Route</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matatu-table-body">
+                            <!-- Matatu data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Passengers Section -->
+            <section id="passengers" class="section">
+                <div class="section-header">
+                    <h2>Passenger Management</h2>
+                    <button class="btn btn-primary admin-only" onclick="showPassengerForm()">
+                        <i class="fas fa-plus"></i> Add Passenger
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="passenger-table-body">
+                            <!-- Passenger data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Routes Section -->
+            <section id="routes" class="section">
+                <div class="section-header">
+                    <h2>Route Management</h2>
+                    <button class="btn btn-primary admin-only" onclick="showRouteForm()">
+                        <i class="fas fa-plus"></i> Add Route
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Route Name</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Fare</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="route-table-body">
+                            <!-- Route data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tickets Section -->
+            <section id="tickets" class="section">
+                <div class="section-header">
+                    <h2>My Tickets</h2>
+                    <button class="btn btn-primary" onclick="showTicketForm()">
+                        <i class="fas fa-plus"></i> Book Ticket
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Seat Number</th>
+                                <th>Date</th>
+                                <th>Passenger</th>
+                                <th>Route</th>
+                                <th>Matatu</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ticket-table-body">
+                            <!-- Ticket data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="payments" class="section">
+                <div class="section-header">
+                    <h2>My Payments</h2>
+                    <button class="btn btn-primary" onclick="showPaymentForm()">
+                        <i class="fas fa-plus"></i> Add Payment
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Confirmation Code</th>
+                                <th>Passenger</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payment-table-body">
+                            <!-- Payment data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- GPS Tracking Section -->
+            <section id="gps" class="section">
+                <div class="section-header">
+                    <h2>GPS Location Tracking</h2>
+                    <button class="btn btn-primary" onclick="showGpsForm()">
+                        <i class="fas fa-plus"></i> Add Location
+                    </button>
+                </div>
+                <div class="gps-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map"></i>
+                        <p>GPS Tracking Map</p>
+                        <small>Map integration would be implemented here</small>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Timestamp</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gps-table-body">
+                                <!-- GPS data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Item</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <!-- Form content will be dynamically generated -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

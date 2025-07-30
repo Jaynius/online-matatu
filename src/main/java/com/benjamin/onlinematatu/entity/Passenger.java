@@ -19,6 +19,10 @@ public class Passenger {
     private String passengerEmail;
     private String passengerPhone;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @ManyToMany
     @JoinTable(
             name = "passenger_matatu",
