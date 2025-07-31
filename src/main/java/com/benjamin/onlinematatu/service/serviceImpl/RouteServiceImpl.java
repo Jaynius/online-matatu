@@ -24,6 +24,8 @@ public class RouteServiceImpl implements RouteService {
         routeDTO.setOrigin(route.getOrigin());
         routeDTO.setDestination(route.getDestination());
         routeDTO.setMatatuList(route.getMatatuList());
+        routeDTO.setFare(route.getFare());
+
         return routeDTO;
     }
 
@@ -34,6 +36,7 @@ public class RouteServiceImpl implements RouteService {
         route.setOrigin(routeDTO.getOrigin());
         route.setDestination(routeDTO.getDestination());
         route.setMatatuList(routeDTO.getMatatuList());
+        route.setFare(routeDTO.getFare());
         return route;
     }
 

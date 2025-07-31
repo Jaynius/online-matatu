@@ -22,8 +22,8 @@ public class MatatuController {
 
     @PostMapping
     public ResponseEntity<MatatuDTO> addMatatu(@RequestBody MatatuDTO matatuDTO) {
-        Matatu matatu= matatuService.convertToEntity(matatuDTO);
-        return new ResponseEntity<>(matatuDTO, HttpStatus.CREATED);
+        MatatuDTO savedMatatu = matatuService.addMatatu(matatuDTO);
+        return new ResponseEntity<>(savedMatatu, HttpStatus.CREATED);
     }
 
     @GetMapping
